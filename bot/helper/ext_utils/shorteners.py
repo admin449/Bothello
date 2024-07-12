@@ -3,6 +3,7 @@ from random import choice, random, randrange
 from time import sleep
 from urllib.parse import quote
 import requests
+import urllib
 from cloudscraper import create_scraper
 from urllib3 import disable_warnings
 
@@ -41,15 +42,20 @@ def short_url(longurl, attempt=0):
         elif "cutt.ly" in _shortener:
             return cget('GET', f'http://cutt.ly/api/api.php?key={_shortener_api}&short={longurl}').json()['url']['shortLink']
         else:
-            res = requests.get('https://{_shortener}/easyapi?key={_shortener_api}&link={longurl}')
+            res = requests.get("https://{_shortener}/easyapi?key={_shortener_api}&link={longurl}")
+            # Online Python compiler (interpreter) to run Python online.
+#import requests
+#import urllib
+# Write Python 3 code in this online editor and run it.
+#r=requests.get("https://api.shareus.io/easy_api?key=1sSrwAGOY4X9waG4sfj60llmjYH2&link=https://shareus.io")
             shorted = res.text
      #       if not shorted:
           #      shrtco_res = cget('GET', f'https://api.shrtco.de/v2/shorten?url={quote(longurl)}').json()
           #      shrtco_link = shrtco_res['result']['full_short_link']
               #  res = requests.get('https://{_shortener}/easyapi?key={_shortener_api}&link={longurl}')
              #   shorted = res.txt
-            if not shorted:
-                shorted = longurl
+          #  if not shorted:
+               # shorted = longurl
             return shorted
     except Exception as e:
         LOGGER.error(e)
