@@ -2,7 +2,7 @@ from base64 import b64encode
 from random import choice, random, randrange
 from time import sleep
 from urllib.parse import quote
-
+import requests
 from cloudscraper import create_scraper
 from urllib3 import disable_warnings
 
@@ -41,13 +41,13 @@ def short_url(longurl, attempt=0):
         elif "cutt.ly" in _shortener:
             return cget('GET', f'http://cutt.ly/api/api.php?key={_shortener_api}&short={longurl}').json()['url']['shortLink']
         else:
-            res = cget('GET', f'https://{_shortener}/api?api={_shortener_api}&url={quote(longurl)}').json()
-            shorted = res['shortenedUrl']
-            if not shorted:
-                shrtco_res = cget('GET', f'https://api.shrtco.de/v2/shorten?url={quote(longurl)}').json()
-                shrtco_link = shrtco_res['result']['full_short_link']
-                res = cget('GET', f'https://{_shortener}/api?api={_shortener_api}&url={shrtco_link}').json()
-                shorted = res['shortenedUrl']
+            res = requests.get('https://{_shortener}/easyapi?key={_shortener_api}&link={longurl}')
+            shorted = res.text
+     #       if not shorted:
+          #      shrtco_res = cget('GET', f'https://api.shrtco.de/v2/shorten?url={quote(longurl)}').json()
+          #      shrtco_link = shrtco_res['result']['full_short_link']
+              #  res = requests.get('https://{_shortener}/easyapi?key={_shortener_api}&link={longurl}')
+             #   shorted = res.txt
             if not shorted:
                 shorted = longurl
             return shorted
