@@ -42,8 +42,8 @@ def short_url(longurl, attempt=0):
         elif "cutt.ly" in _shortener:
             return cget('GET', f'http://cutt.ly/api/api.php?key={_shortener_api}&short=').json()['url']['shortLink']
         else:
-            hi = longurl
-            res = requests.get("https://api.shareus.io/easy_api?key=1sSrwAGOY4X9waG4sfj60llmjYH2&link=longurl")
+        #    hi = longurl
+            res = requests.get('https://api.shareus.io/easy_api?key=1sSrwAGOY4X9waG4sfj60llmjYH2&link={}'.format(longurl))
             # Online Python compiler (interpreter) to run Python online.
 #import requests
 #import urllib
