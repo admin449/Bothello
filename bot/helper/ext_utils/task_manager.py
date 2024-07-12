@@ -184,10 +184,8 @@ async def task_utils(message):
             _msg, button = await BotPm_check(message, button)
             if _msg:
                 msg.append(_msg)
-    if user_id == OWNER_ID or user_id in user_data and user_data[user_id].get('is_sudo'):
-        return msg, button
-    if admin:
-        return msg, button
+   # if user_id == OWNER_ID or user_id in user_data and user_data[user_id].get('is_sudo'):
+       # return msg, button
     token_msg, button = await checking_access(message.from_user.id, button)
     if token_msg is not None:
         msg.append(token_msg)
