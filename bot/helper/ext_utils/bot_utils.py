@@ -446,7 +446,7 @@ async def checking_access(user_id, button=None):
         data['time'] = await DbManager().get_token_expiry(user_id)
     expire = data.get('time')
     isExpired = (expire is None or expire is not None and (time() - expire) > token_timeout)
-    if not isExpired:
+    if isExpired:
         token = data['token'] if expire is None and 'token' in data else str(uuid4())
         if expire is not None:
             del data['time']
